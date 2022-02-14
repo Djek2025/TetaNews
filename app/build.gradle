@@ -54,7 +54,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
 
     //by viewBinding() ext
-    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.7'
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
