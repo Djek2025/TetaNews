@@ -44,7 +44,7 @@ class NewsListFragment : Fragment(R.layout.fragment_list_news) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             vm.news.collect {
-
+                binding.newsListRecycler.adapter = NewsListAdapter(it.articles)
             }
         }
     }

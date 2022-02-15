@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/drawable/blue_oval.xml" value="0.233" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/fragment_list_news.xml" value="0.24682971014492755" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/news_list_item.xml" value="0.33" />
       </map>
     </option>
   </component>
