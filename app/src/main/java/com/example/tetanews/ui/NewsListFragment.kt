@@ -40,6 +40,7 @@ class NewsListFragment : Fragment(R.layout.fragment_list_news) {
         lifecycleScope.launch {
             vm.news.collect {
                 binding.newsListRecycler.adapter = adapter.apply { setNewsList(it.articles) }
+                binding.refresh.isRefreshing = false
             }
         }
     }
@@ -57,6 +58,13 @@ class NewsListFragment : Fragment(R.layout.fragment_list_news) {
                 return true
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.refresh.setOnRefreshListener {
+            vm.refresh()
+        }
     }
 
     override fun onDestroyView() {
