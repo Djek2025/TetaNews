@@ -4,26 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tetanews.App
 import com.example.tetanews.R
-import com.example.tetanews.data.NewsRepository
-import com.example.tetanews.data.services.NewsService
 import com.example.tetanews.databinding.FragmentListNewsBinding
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NewsListFragment : Fragment(R.layout.fragment_list_news) {
 
     private var _binding: FragmentListNewsBinding? = null
     private val binding get() = checkNotNull(_binding)
+    @Inject lateinit var adapter: NewsListAdapter
     @Inject lateinit var vm: NewsListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +39,24 @@ class NewsListFragment : Fragment(R.layout.fragment_list_news) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             vm.news.collect {
-                binding.newsListRecycler.adapter = NewsListAdapter(it.articles)
+                binding.newsListRecycler.adapter = adapter.apply { setNewsList(it.articles) }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filterObj.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filterObj.filter(newText)
+                return true
+            }
+        })
     }
 
     override fun onDestroyView() {

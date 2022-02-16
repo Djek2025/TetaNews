@@ -4,15 +4,22 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tetanews.data.models.Article
 import com.example.tetanews.databinding.NewsListItemBinding
 import com.example.tetanews.ui.NewsListAdapter.*
 import com.example.tetanews.utils.getTimeInHours
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.delay
 
-class NewsListAdapter(private val newsList: List<Article>): RecyclerView.Adapter<ViewHolder>() {
+class NewsListAdapter(private var newsList: List<Article> = listOf()) :
+    RecyclerView.Adapter<ViewHolder>() {
+
+    private var filteredNewsList: List<Article> = listOf()
+
+    fun setNewsList(data: List<Article>) {
+        newsList = data
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -26,27 +33,56 @@ class NewsListAdapter(private val newsList: List<Article>): RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.run {
-            newsTitle.text = newsList[position].title
+            val data = dataSelector()
+            newsTitle.text = data[position].title
             newsTitle.isSelected = true
-            newsDescription.text = newsList[position].description
-            newsSource.text = newsList[position].source.name
-            newsTimeTextView.text = newsList[position].getTimeInHours()
+            newsDescription.text = data[position].description
+            newsSource.text = data[position].source.name
+            newsTimeTextView.text = data[position].getTimeInHours()
 
             newsOpen.setOnClickListener {
                 holder.itemView.context.startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(newsList[position].url))
+                    Intent(Intent.ACTION_VIEW, Uri.parse(data[position].url))
                 )
             }
 
             Picasso
                 .get()
-                .load(newsList[position].urlToImage)
+                .load(data[position].urlToImage)
                 .into(newsImgView)
         }
     }
 
-    override fun getItemCount(): Int = newsList.size
+    private fun dataSelector(): List<Article> {
+        return when (filteredNewsList.isNullOrEmpty()) {
+            true -> newsList
+            false -> filteredNewsList
+        }
+    }
+
+    override fun getItemCount(): Int = dataSelector().size
 
     class ViewHolder(val binding: NewsListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
+    val filterObj = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+
+            val filteredList: MutableList<Article> = mutableListOf()
+
+            if (!constraint.isNullOrEmpty()) {
+                val query = constraint.toString().trim().lowercase()
+                newsList.forEach {
+                    if (it.toString().contains(query)) {
+                        filteredList.add(it)
+                    }
+                }
+            }
+            return FilterResults().apply { values = filteredList }
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            results?.let { filteredNewsList = results.values as List<Article> }
+            notifyDataSetChanged()
+        }
+    }
 }
