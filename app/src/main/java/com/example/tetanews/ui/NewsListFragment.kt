@@ -41,6 +41,8 @@ class NewsListFragment : Fragment(R.layout.fragment_list_news) {
             vm.news.collect {
                 binding.newsListRecycler.adapter = adapter.apply { setNewsList(it.articles) }
                 binding.refresh.isRefreshing = false
+                binding.shimmer?.stopShimmer()
+                binding.shimmer?.visibility = View.GONE
             }
         }
     }

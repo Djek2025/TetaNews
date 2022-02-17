@@ -35,7 +35,7 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
         holder.binding.run {
             val data = dataSelector()
             newsTitle.text = data[position].title
-            newsTitle.isSelected = true
+            cardView.setOnClickListener { newsTitle.run { isSelected = !isSelected } }
             newsDescription.text = data[position].description
             newsSource.text = data[position].source.name
             newsTimeTextView.text = data[position].getTimeInHours()
@@ -66,13 +66,12 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
 
     val filterObj = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
-
             val filteredList: MutableList<Article> = mutableListOf()
 
-            if (!constraint.isNullOrEmpty()) {
+            constraint?.let {
                 val query = constraint.toString().trim().lowercase()
                 newsList.forEach {
-                    if (it.toString().contains(query)) {
+                    if (it.run { author + content + description + title }.contains(query)) {
                         filteredList.add(it)
                     }
                 }
@@ -81,7 +80,7 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
         }
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-            results?.let { filteredNewsList = results.values as List<Article> }
+            filteredNewsList = results?.values as List<Article>
             notifyDataSetChanged()
         }
     }

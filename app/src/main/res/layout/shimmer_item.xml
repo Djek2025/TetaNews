@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/newsImgView"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        app:cardBackgroundColor="#b3b3b3"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/newsTitle"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
+        app:cardBackgroundColor="#b3b3b3"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toStartOf="@id/newsTimeTextView"
+        app:layout_constraintStart_toEndOf="@+id/figure"
+        app:layout_constraintTop_toBottomOf="@id/newsImgView" />
+
+    <FrameLayout
+        android:id="@+id/newsTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsOpen"
+        app:layout_constraintEnd_toStartOf="@+id/newsOpen"
+        app:layout_constraintTop_toBottomOf="@+id/newsImgView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/figure"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_margin="4dp"
+        android:padding="8dp"
+        android:src="@drawable/oval"
+        app:layout_constraintStart_toStartOf="@+id/newsImgView"
+        app:layout_constraintTop_toBottomOf="@+id/newsImgView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/newsOpen"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:src="@drawable/ic_round_arrow_forward_ios_24"
+        app:layout_constraintEnd_toEndOf="@+id/newsImgView"
+        app:layout_constraintTop_toBottomOf="@+id/newsImgView" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/newsSource"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="180dp"
+        android:layout_height="24dp"
+        android:layout_margin="4dp"
+        app:cardBackgroundColor="#b3b3b3"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toEndOf="@+id/figure"
+        app:layout_constraintTop_toBottomOf="@id/newsTitle" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/newsDescription"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:justificationMode="inter_word"
+        app:cardBackgroundColor="#b3b3b3"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/newsImgView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newsSource"
+        tools:targetApi="o" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
