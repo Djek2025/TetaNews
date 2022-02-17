@@ -71,7 +71,7 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
             constraint?.let {
                 val query = constraint.toString().trim().lowercase()
                 newsList.forEach {
-                    if (it.run { author + content + description + title }.contains(query)) {
+                    if (it.run { (author + content + description + title).lowercase() }.contains(query)) {
                         filteredList.add(it)
                     }
                 }
