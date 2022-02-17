@@ -10,6 +10,7 @@ News info item contain:
 * Source
 * Image
 * redirect button (in web browser app)
+
 Navigate to the full news into web browser by clicking on the button.
   
 ## Libs
