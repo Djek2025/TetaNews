@@ -1,21 +1,26 @@
 package com.example.tetanews.data
 
+import com.example.tetanews.data.models.NewsResponseWrapper
+import com.example.tetanews.data.models.Status
 import com.example.tetanews.data.services.NewsService
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 
 class NewsRepository(private val service: NewsService) {
 
     suspend fun fetchNews() = flow {
         try {
             val response = service.getNewsResponse()
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 response.body()?.let {
-                    emit(it)
+                    emit(
+                        NewsResponseWrapper(Status.Success, it)
+                    )
                 }
             }
-        }catch (e: HttpException){
-
+        } catch (e: Exception) {
+            emit(
+                NewsResponseWrapper(Status.Error(e), null)
+            )
         }
     }
 

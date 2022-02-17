@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tetanews.data.NewsRepository
 import com.example.tetanews.data.models.NewsResponse
+import com.example.tetanews.data.models.NewsResponseWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,7 +18,7 @@ class NewsListViewModel(private val repo: NewsRepository): ViewModel() {
         refresh()
     }
 
-    private val _news = MutableSharedFlow<NewsResponse>(
+    private val _news = MutableSharedFlow<NewsResponseWrapper>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
         extraBufferCapacity = 0

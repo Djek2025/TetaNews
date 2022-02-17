@@ -6,11 +6,15 @@ import okhttp3.Response
 
 class NewsInterceptor: Interceptor {
 
+    companion object{
+        private const val HEADER_STR = "X-Api-Key"
+    }
+
     override fun intercept(chain: Interceptor.Chain): Response {
 
         val newRequest = chain.request()
             .newBuilder()
-            .addHeader("X-Api-Key", BuildConfig.API_KEY)
+            .addHeader(HEADER_STR, BuildConfig.API_KEY)
             .build()
 
         return chain.proceed(newRequest)
