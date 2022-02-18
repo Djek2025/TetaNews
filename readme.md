@@ -2,16 +2,15 @@
 Application to browse news of Ukraine
 
 ## Overview
-App show the scrollable list of top news from Ukraine.
-You can filtered news by text field on the top.
+App show the scrollable list of top news from Ukraine.<br>
+You can filtered news by text field on the top.<br>
 News info item contain:
 * Title
 * Description
 * Source
 * Image
 * redirect button (in web browser app)
-
-Navigate to the full news into web browser by clicking on the button.
+<br>Navigate to the full news into web browser by clicking on the button.
   
 ## Libs
 * Dagger 2

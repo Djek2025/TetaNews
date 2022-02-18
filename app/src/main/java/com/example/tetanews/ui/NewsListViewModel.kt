@@ -3,7 +3,6 @@ package com.example.tetanews.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tetanews.data.NewsRepository
-import com.example.tetanews.data.models.NewsResponse
 import com.example.tetanews.data.models.NewsResponseWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow

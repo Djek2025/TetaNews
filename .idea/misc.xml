@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/drawable/blue_oval.xml" value="0.233" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.233" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/drawable/ic_name_logo.xml" value="0.233" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/drawable/ic_round_arrow_forward_ios_24.xml" value="0.233" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/drawable/launch_screeen.xml" value="0.233" />
@@ -11,7 +12,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout-land/fragment_list_news.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/fragment_list_news.xml" value="0.24682971014492755" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/news_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/news_list_item.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TetaNews/app/src/main/res/layout/shimmer_item.xml" value="0.22" />
       </map>
     </option>

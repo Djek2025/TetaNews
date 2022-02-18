@@ -5,7 +5,9 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tetanews.R
 import com.example.tetanews.data.models.Article
 import com.example.tetanews.databinding.NewsListItemBinding
 import com.example.tetanews.ui.NewsListAdapter.*
@@ -49,6 +51,8 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
             Picasso
                 .get()
                 .load(data[position].urlToImage)
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .fit().centerCrop()
                 .into(newsImgView)
         }
     }
