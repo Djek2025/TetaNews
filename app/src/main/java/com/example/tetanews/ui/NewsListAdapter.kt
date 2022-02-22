@@ -1,11 +1,11 @@
 package com.example.tetanews.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tetanews.R
 import com.example.tetanews.data.models.Article
@@ -14,14 +14,22 @@ import com.example.tetanews.ui.NewsListAdapter.*
 import com.example.tetanews.utils.getTimeInHours
 import com.squareup.picasso.Picasso
 
-class NewsListAdapter(private var newsList: List<Article> = listOf()) :
-    RecyclerView.Adapter<ViewHolder>() {
+class NewsListAdapter(
+    private var newsList: List<Article> = listOf(),
+    private var filteredNewsList: List<Article> = listOf()) : RecyclerView.Adapter<ViewHolder>() {
 
-    private var filteredNewsList: List<Article> = listOf()
+    private fun dataSelector(): List<Article> {
+        return when (filteredNewsList.isNullOrEmpty()) {
+            true -> newsList
+            false -> filteredNewsList
+        }
+    }
 
     fun setNewsList(data: List<Article>) {
         newsList = data
     }
+
+    override fun getItemCount(): Int = dataSelector().size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -48,23 +56,16 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
                 )
             }
 
-            Picasso
-                .get()
-                .load(data[position].urlToImage)
-                .placeholder(R.drawable.ic_baseline_image_24)
-                .fit().centerCrop()
-                .into(newsImgView)
+            if (data[position].urlToImage.isNotEmpty()){
+                Picasso
+                    .get()
+                    .load(data[position].urlToImage)
+                    .placeholder(R.drawable.ic_baseline_image_24)
+                    .fit().centerCrop()
+                    .into(newsImgView)
+            }
         }
     }
-
-    private fun dataSelector(): List<Article> {
-        return when (filteredNewsList.isNullOrEmpty()) {
-            true -> newsList
-            false -> filteredNewsList
-        }
-    }
-
-    override fun getItemCount(): Int = dataSelector().size
 
     class ViewHolder(val binding: NewsListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -83,6 +84,8 @@ class NewsListAdapter(private var newsList: List<Article> = listOf()) :
             return FilterResults().apply { values = filteredList }
         }
 
+        @SuppressLint("NotifyDataSetChanged")
+        @Suppress("UNCHECKED_CAST")
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             filteredNewsList = results?.values as List<Article>
             notifyDataSetChanged()

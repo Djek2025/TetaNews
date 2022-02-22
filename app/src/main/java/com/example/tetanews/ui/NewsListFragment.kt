@@ -41,24 +41,14 @@ class NewsListFragment : Fragment(R.layout.fragment_list_news) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             vm.news.collect {
-                when(it.status){
-                    is Status.Success -> {
-                        binding.newsListRecycler.adapter = adapter.apply {
-                            it.response?.let { response ->
-                                setNewsList(
-                                    response.articles
-                                )
-                            }
-                        }
-                    }
 
-                    is Status.Error -> {
-                        Toast.makeText(requireContext(), it.status.e.toString(), Toast.LENGTH_LONG).show()
-                    }
+                binding.newsListRecycler.adapter = adapter.apply {
+                    it?.let { response -> setNewsList(response.articles) }
                 }
+
                 binding.refresh.isRefreshing = false
-                binding.shimmer?.stopShimmer()
-                binding.shimmer?.visibility = View.GONE
+                binding.shimmer.stopShimmer()
+                binding.shimmer.visibility = View.GONE
             }
         }
     }

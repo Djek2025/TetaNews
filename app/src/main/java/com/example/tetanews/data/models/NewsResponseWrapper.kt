@@ -8,6 +8,6 @@ data class NewsResponseWrapper(
 )
 
 sealed class Status{
-    object Success : Status()
+    object Success: Status()
     class Error(val e: Exception): Status()
 }

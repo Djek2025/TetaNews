@@ -2,14 +2,14 @@ package com.example.tetanews.data
 
 import com.example.tetanews.data.models.NewsResponseWrapper
 import com.example.tetanews.data.models.Status
-import com.example.tetanews.data.services.NewsService
+import com.example.tetanews.data.services.NewsApi
 import kotlinx.coroutines.flow.flow
 
-class NewsRepository(private val service: NewsService) {
+class NewsRepository(private val api: NewsApi) {
 
     suspend fun fetchNews() = flow {
         try {
-            val response = service.getNewsResponse()
+            val response = api.getNewsResponse()
             if (response.isSuccessful) {
                 response.body()?.let {
                     emit(
